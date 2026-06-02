@@ -13,3 +13,6 @@ MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
 MYSQL_PORT = int(os.getenv("MYSQL_PORT"))
 
 #-----------------------------------------------------------------------------------------------------------------------
+
+# Get URL connect to MongoAtlas
+MONGO_URI = os.getenv("MONGO_URI")

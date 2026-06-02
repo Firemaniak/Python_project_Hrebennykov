@@ -1,7 +1,7 @@
 import ui_module
 
 from settings import MYSQL_HOST
-
+from logger import log_search, get_popular_searches
 from sql_requests import (
     get_all_films,
     select_category,
@@ -13,36 +13,48 @@ from sql_requests import (
 
 # -----------------------------------------------------------------------------------------------------------------------
 
-# print(get_all_films())
-# print(MYSQL_HOST)
-
-# -----------------------------------------------------------------------------------------------------------------------
-
 def main():
     ui_module.show_welcome()
 
-    while True:
+    is_running = True
+
+    while is_running:
         ui_module.show_menu()
-
-        result = select_options()
-
-        if result is False:
-            break
+        is_running = select_options()
 
 
 # -----------------------------------------------------------------------------------------------------------------------
+# Выбор опций для пользователя
 
 def select_options():
     choice = input("Choose an option: ")
 
-    if choice == "1":                             # Поиска по ключевому слову
-        keyword = input('Enter a film name: ')
+
+    if choice == "1":                               # Поиска по ключевому слову-----------------------------------------
+        keyword = input("Enter a film name: ")
         films = search_films(keyword)
+
         for i, row in enumerate(films, start=1):
-            print(f'{i}. {row[0]}')
+            print(f"{i}. {row[0]}")
+
+        if len(films) == 1:
+            log_search(films[0][0])
+            print(f"Film: {films[0][0]} --> Movie search saved.")
+
+        elif len(films) >= 2:
+
+            film_number = input("Choose movie number to save search: ")
+
+            selected_movie = films[int(film_number) - 1]
+
+            log_search(selected_movie[0])
+
+            print(f"Film: {selected_movie[0]} --> Movie search saved.")
 
 
-    elif choice == "2":                           # Поиска по категориях
+
+
+    elif choice == "2":                           # Поиска по категориях------------------------------------------------
 
         while True:
 
@@ -110,7 +122,8 @@ def select_options():
 
 
 
-    elif choice == "3":                                   # Поиска по годам
+
+    elif choice == "3":                                   # Поиска по годам----------------------------------------------
 
         min_year, max_year = get_year_range()
 
@@ -160,17 +173,29 @@ def select_options():
 
                 break
 
-    elif choice == "4":                                          # Популярные запросы
-        pass
 
-    elif choice == "0":                                          # Выход из консольного приложения
+
+    elif choice == "4":                                         # Вывод популярных запросов-----------------------------
+
+        popular_movies = get_popular_searches()
+
+        print("\nPopular searches:\n")
+
+        for i, movie in enumerate(popular_movies, start=1):
+            print(f"{i}. {movie['_id']} ({movie['count']} searches)")
+            return True
+
+    elif choice == "0":                                          # Выход из консольного приложения----------------------
         print("Goodbye!")
         return False
 
+    return True
 
 # -----------------------------------------------------------------------------------------------------------------------
+# Вызов только с главного модуля(тут)
 
 if __name__ == '__main__':
     main()
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
