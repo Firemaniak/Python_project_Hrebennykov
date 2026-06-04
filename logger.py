@@ -1,38 +1,46 @@
 # Для логирования популярных запросов
 
-from mongo_client import get_collection
+from pymongo.errors import PyMongoError
 
-collection = get_collection()
+from mongo_client import get_collection
 
 
 def log_search(movie_title):
 
-    if movie_title is None:
+    if not movie_title:
         return
 
-    collection = get_collection()
+    try:
+        collection = get_collection()
 
-    collection.insert_one({
-        "movie_title": movie_title
-    })
+        collection.insert_one({
+            "movie_title": movie_title
+        })
 
-#-----------------------------------------------------------------------------------------------------------------------
-# Чтение данных из MongoDB
+    except PyMongoError:
+        print("Could not save search statistics.")
+
 
 def get_popular_searches():
-    collection = get_collection()
 
-    return collection.aggregate([
-        {
-            "$group": {
-                "_id": "$movie_title",
-                "count": {"$sum": 1}
+    try:
+        collection = get_collection()
+
+        return collection.aggregate([
+            {
+                "$group": {
+                    "_id": "$movie_title",
+                    "count": {"$sum": 1}
+                }
+            },
+            {
+                "$sort": {"count": -1}
+            },
+            {
+                "$limit": 10
             }
-        },
-        {
-            "$sort": {"count": -1}
-        },
-        {
-            "$limit": 10
-        }
-    ])
+        ])
+
+    except PyMongoError:
+        print("Could not load popular searches.")
+        return []
