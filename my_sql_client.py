@@ -1,4 +1,4 @@
-#Модуль чисто для подключения к базе данных MY_SQL
+# Module for connecting to a MySQL database
 
 import pymysql
 
@@ -13,6 +13,12 @@ from settings import (
 #-----------------------------------------------------------------------------------------------------------------------
 
 def get_connection():
+
+    """
+    Create and return a connection
+    to the MySQL Sakila database.
+    """
+
     connection = pymysql.connect(
         host=MYSQL_HOST,
         user=MYSQL_USER,

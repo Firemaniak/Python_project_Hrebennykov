@@ -1,4 +1,4 @@
-# Запросы в переменных
+# Queries Stored in Variables
 
 GET_ALL_FILMS = """
     SELECT film_id, title

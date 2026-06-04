@@ -1,9 +1,16 @@
 import ui_module
 from select_options import select_options
+from animation import loading_animation
 
 # -----------------------------------------------------------------------------------------------------------------------
 
-def main():
+def main() -> None:
+
+    """
+    Run the movie search console application.
+    """
+
+    loading_animation()
     ui_module.show_welcome()
 
     is_running = True
@@ -13,7 +20,6 @@ def main():
         is_running = select_options()
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Вызов только с главного модуля(тут)
 
 if __name__ == '__main__':
     main()

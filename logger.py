@@ -1,11 +1,15 @@
-# Для логирования популярных запросов
+# For logging popular queries
 
 from pymongo.errors import PyMongoError
-
 from mongo_client import get_collection
 
+#-----------------------------------------------------------------------------------------------------------------------
 
-def log_search(movie_title):
+def log_search(movie_title: str) -> None:
+
+    """
+    Save a movie title to MongoDB search statistics.
+    """
 
     if not movie_title:
         return
@@ -20,13 +24,19 @@ def log_search(movie_title):
     except PyMongoError:
         print("Could not save search statistics.")
 
+#-----------------------------------------------------------------------------------------------------------------------
 
-def get_popular_searches():
+def get_popular_searches() -> list:
+
+    """
+    Retrieve the top 10 most popular movie searches
+    from MongoDB statistics.
+    """
 
     try:
         collection = get_collection()
 
-        return collection.aggregate([
+        return list(collection.aggregate([
             {
                 "$group": {
                     "_id": "$movie_title",
@@ -39,7 +49,7 @@ def get_popular_searches():
             {
                 "$limit": 10
             }
-        ])
+        ]))
 
     except PyMongoError:
         print("Could not load popular searches.")

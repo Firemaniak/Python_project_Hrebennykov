@@ -1,4 +1,7 @@
+# User Selection Module
+
 from logger import log_search, get_popular_searches
+from animation import loading_animation
 from sql_requests import (
     select_category,
     search_films,
@@ -7,10 +10,18 @@ from sql_requests import (
     search_by_year_range,
 )
 
-
 #---------------------------------------# user should select option-----------------------------------------------------
 
-def select_options():
+def select_options() -> bool:
+
+    """
+    Handle the user's main menu choice.
+
+    Returns:
+        bool: True if the application should continue running,
+        False if the user chooses to exit.
+    """
+
     choice = input("Choose an option: ")
 
     if choice == "1":
@@ -34,10 +45,17 @@ def select_options():
 
     return True
 
-#---------------------------------------------------# Поиска по ключевому слову-----------------------------------------
+#---------------------------------------------------# Keyword Search----------------------------------------------------
 
-def handle_keyword_search():
+def handle_keyword_search() -> None:
+
+    """
+    Search movies by title keyword
+    and save the selected movie to statistics.
+    """
+
     keyword = input("Enter a film name: ")
+    loading_animation()
     films = search_films(keyword)
 
     if not films:
@@ -73,9 +91,16 @@ def handle_keyword_search():
         print("Invalid movie number.")
 
 
-#-------------------------------------------------# Поиска по категориях------------------------------------------------
+#-------------------------------------------------# Search by Category--------------------------------------------------
 
-def handle_category_search():
+def handle_category_search() -> None:
+
+    """
+    Display movie categories and allow
+    browsing movies by selected category.
+    """
+
+    loading_animation()
 
     while True:
         categories = get_all_categories()
@@ -91,6 +116,7 @@ def handle_category_search():
         )
 
         if category_id == "0":
+            loading_animation()
             break
 
         if not category_id.isdigit():
@@ -133,10 +159,13 @@ def handle_category_search():
             else:
                 print("\nInvalid option.")
 
+#-----------------------------------------------------# Search by Year--------------------------------------------------
 
-#-----------------------------------------------------# Поиска по годам-------------------------------------------------
+def handle_year_search() -> None:
 
-def handle_year_search():
+    """
+    Search movies by a selected release year range.
+    """
 
     min_year, max_year = get_year_range()
 
@@ -144,6 +173,7 @@ def handle_year_search():
 
     start_year = input("Enter start year: ")
     end_year = input("Enter end year: ")
+    loading_animation()
 
     if not start_year.isdigit() or not end_year.isdigit():
         print("Years must be numbers.")
@@ -197,9 +227,16 @@ def handle_year_search():
             print("Invalid option.")
             break
 
-#---------------------------------------------------# Вывод популярных запросов-----------------------------------------
+#---------------------------------------------------# Displaying Popular Queries----------------------------------------
 
-def handle_popular_searches():
+def handle_popular_searches() -> None:
+
+    """
+    Display the most popular movie searches
+    stored in MongoDB.
+    """
+
+    loading_animation()
 
     popular_movies = list(get_popular_searches())
 
@@ -211,7 +248,6 @@ def handle_popular_searches():
 
     for i, movie in enumerate(popular_movies, start=1):
         print(f"{i}. {movie['_id']} ({movie['count']} searches)")
-#
 
 #-----------------------------------------------------------------------------------------------------------------------
 

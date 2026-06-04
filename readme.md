@@ -103,23 +103,23 @@ python main.py
 
 ### Main Menu
 
-![Main Menu](screenshots/01_main_menu.png)
+![Main Menu](screenshots/001_main_menu.png)
 
 ### Search by Title
 
-![Search by Title](screenshots/02_search_title.png)
+![Search by Title](screenshots/002_search_title.png)
 
 ### Search by Category
 
-![Category Search](screenshots/03_category_search.png)
+![Category Search](screenshots/003_category_search.png)
 
 ### Search by Year Range
 
-![Search by Year Range](screenshots/04_year_search.png)
+![Search by Year Range](screenshots/004_year_search.png)
 
 ### Popular Searches
 
-![Popular Searches](screenshots/05_popular_searches.png)
+![Popular Searches](screenshots/005_popular_searches.png)
 
 ---
 

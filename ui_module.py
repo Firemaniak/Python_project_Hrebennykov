@@ -1,46 +1,82 @@
-#Модуль для работы с интерфейсом пользователя
+# User Interface Module
 
-#-----------------------------------------------------------------------------------------------------------------------
+# Styles
+DIM = "\033[2m"
+ITALIC = "\033[3m"
+UNDERLINE = "\033[4m"
 
-def show_welcome():
-    # print(f'Welcome to Kozak_production \n{50 * "-"}')
-    print("""
-                Welcome to Kozak_production!
+# Standard colors
+GREEN = "\033[92m"
+CYAN = "\033[96m"
+YELLOW = "\033[93m"
+BLUE = "\033[94m"
+BOLD = "\033[1m"
+BLACK = "\033[30m"
+RED = "\033[31m"
+MAGENTA = "\033[35m"
+WHITE = "\033[37m"
 
-In this console application, you can find the perfect movie for any mood or taste.
+# Bright colors
+BRIGHT_BLACK = "\033[90m"
+BRIGHT_RED = "\033[91m"
+BRIGHT_GREEN = "\033[92m"
+BRIGHT_YELLOW = "\033[93m"
+BRIGHT_BLUE = "\033[94m"
+BRIGHT_MAGENTA = "\033[95m"
+BRIGHT_CYAN = "\033[96m"
+BRIGHT_WHITE = "\033[97m"
 
-You can search for movies in two ways:
-1. By keyword search (search by part of the movie title).
-2. By genre and release year range.
-   Before searching, you will see:
-   - a list of all available genres
-   - the minimum and maximum release years in the database
+# Reset
+RESET = "\033[0m"
 
-You can also stay on trend and discover what other users are searching 
-for with our most popular search statistics.
 
---- Enter 1 to search by keyword
---- Enter 2 to view all genres
---- Enter 3 to search by release year range
---- Enter 4 to show favorite movies
---- Enter 0 to exit the program
+def show_welcome() -> None:
 
-"""
-)
+    """
+    Display the welcome message and application description.
+    """
 
-#-----------------------------------------------------------------------------------------------------------------------
+    print(f"""{CYAN}{BRIGHT_BLACK}
+                               ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+{BRIGHT_RED}₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪۞{RESET} WELCOME TO KOZAK_PRODUCTION {BRIGHT_RED}۞₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪{RESET}
+                        {BRIGHT_BLACK}       ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ {RESET}
+{RESET}
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ {ITALIC}{BRIGHT_WHITE}In this console application, you can find the perfect movie for any mood or taste.                      ┃
+┃                                                                                                         ┃
+┃   You can search for movies in several ways:                                                            ┃
+┃   1. {UNDERLINE}By keyword search{RESET} {BRIGHT_WHITE}                                                                                 ┃
+┃   2. {UNDERLINE}By genre{RESET}      {BRIGHT_WHITE}                                                                                     ┃
+┃   3. {UNDERLINE}By release year range{RESET} {BRIGHT_WHITE}                                                                             ┃
+┃                                                                                                         ┃
+┃   You can also discover what other users are searching for                                              ┃
+┃   with our popular search statistics.{RESET}                                                                   ┃
+┃                                                                                                         ┃
+┃   {YELLOW}--- Enter {RESET}{BRIGHT_BLUE}1{RESET}{YELLOW} to search by keyword   {RESET}                                                                   ┃
+┃   {YELLOW}--- Enter {RESET}{BRIGHT_BLUE}2{RESET}{YELLOW} to view all genres  {RESET}                                                                      ┃
+┃   {YELLOW}--- Enter {BRIGHT_BLUE}3{RESET}{YELLOW} to search by release year range   {RESET}                                                        ┃
+┃   {YELLOW}--- Enter {BRIGHT_BLUE}4{RESET}{YELLOW} to show popular searches    {RESET}                                                              ┃
+┃   {YELLOW}--- Enter {BRIGHT_BLUE}0{RESET}{YELLOW} to exit the program{RESET}                                                                       ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛   """)
 
-def show_menu():
-    print("""
-        ==============================
-               MOVIE SEARCH APP
-        ==============================
 
-        1. Search movies by keyword
-        2. View all genres
-        3. Search by genre and year range
-        4. View popular searches
-        0. Exit
-    """)
+def show_menu() -> None:
+
+    """
+    Display the main menu with available user options.
+    """
+
+    print(f"""{GREEN}
+                       {BRIGHT_BLACK}      ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+{BRIGHT_RED}₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪۞{RESET} MOVIE SEARCH APP {BRIGHT_RED}۞₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪₪{RESET}
+                   {BRIGHT_BLACK}          ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛{RESET}
+
+{BRIGHT_BLUE}1.{RESET} {BRIGHT_WHITE}Search movies by keyword 
+{BRIGHT_BLUE}2.{RESET} {BRIGHT_WHITE}View all genres
+{BRIGHT_BLUE}3.{RESET} {BRIGHT_WHITE}Search by genre and year range
+{BRIGHT_BLUE}4.{RESET} {BRIGHT_WHITE}View popular searches
+{BRIGHT_BLUE}0.{RESET} {BRIGHT_WHITE}Exit (⊃｡•́‿•̀｡)⊃
+""")
+
 
 #-----------------------------------------------------------------------------------------------------------------------

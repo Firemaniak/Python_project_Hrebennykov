@@ -14,4 +14,10 @@ collection = db["search_logs"]
 
 
 def get_collection():
+
+    """
+    Return the MongoDB collection used
+    for storing movie search statistics.
+    """
+
     return collection

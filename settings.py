@@ -1,8 +1,10 @@
-import os
+# Intermediary for connecting to the database
 
+import os
 from dotenv import load_dotenv
 
 #-----------------------------------------------------------------------------------------------------------------------
+# Get data to connect to SQL
 
 load_dotenv()
 
@@ -13,6 +15,6 @@ MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
 MYSQL_PORT = int(os.getenv("MYSQL_PORT"))
 
 #-----------------------------------------------------------------------------------------------------------------------
-
 # Get URL connect to MongoAtlas
+
 MONGO_URI = os.getenv("MONGO_URI")
