@@ -103,23 +103,23 @@ python main.py
 
 ### Main Menu
 
-*****SCREENSHOT_MAIN_MENU*****
+![Main Menu](screenshots/01_main_menu.png)
 
 ### Search by Title
 
-*****SCREENSHOT_SEARCH_BY_TITLE*****
+![Search by Title](screenshots/02_search_title.png)
 
 ### Search by Category
 
-*****SCREENSHOT_SEARCH_BY_CATEGORY*****
+![Category Search](screenshots/03_category_search.png)
 
 ### Search by Year Range
 
-*****SCREENSHOT_SEARCH_BY_YEAR_RANGE*****
+![Search by Year Range](screenshots/04_year_search.png)
 
 ### Popular Searches
 
-*****SCREENSHOT_POPULAR_SEARCHES*****
+![Popular Searches](screenshots/05_popular_searches.png)
 
 ---
 
@@ -137,7 +137,7 @@ MongoDB Atlas is used to store and analyze movie search statistics.
 
 ## Author
 
-Oleksii Hrebennykov
+Oleksii Hrebennykov / 121225-ptm
 
 ---
 
